@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Culinary Delights</title>
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        section {
+            padding: 60px 20px;
+            margin: 40px 0;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+        }
+        
+        #home {
+            background-color: #ffffff;
+        }
+        
+        #recipes {
+            background-color: #fff;
+        }
+        
+        #about {
+            background-color: #e8f5e9;
+        }
+        
+        #contact {
+            background-color: #f1f8e9;
+        }
+        
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            text-align: center;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            background-color: #f4f4f4;
+        }
+        
+        header {
+            width: 100%;
+            position: fixed;
+            z-index: 1;
+            /* Ensures the header content is above the background */
+        }
+        
+        .af:hover {
+            transform: scale(1.1);
+        }
+        
+        header .header-img {
+            background-image: url('bg_img.jpg');
+            background-repeat: repeat-x;
+            background-position: top left;
+            width: 100%;
+            height: 122px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: -1;
+        }
+        
+        nav {
+            width: 200;
+            position: relative;
+            /* Keeps the navigation and logo in front of the header image */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            z-index: 2;
+            box-sizing: border-box;
+            /* Ensures navigation is above the background image */
+            padding: 1rem;
+            /* Added padding to prevent overlap with header image */
+            background-color: rgba(51, 51, 51, 0.7);
+            /* Add slight transparency to nav background */
+        }
+        
+        .logo {
+            color: #f4f4f4;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            margin: 10px 0;
+        }
+        
+        nav ul li {
+            margin: 0 15px;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+        }
+        
+        .search-container {
+            display: flex;
+            width: 100%;
+            margin-top: 10px;
+        }
+        
+        .search-container input {
+            flex-grow: 1;
+            padding: 0.5rem;
+            margin-right: 10px;
+        }
+        
+        #home {
+            position: relative;
+            /* Ensure proper stacking context */
+            background-color: #2d2414;
+            /* Set fallback color */
+            color: white;
+            text-align: center;
+            padding: 80px 20px;
+            min-height: 100vh;
+            /* Ensure full viewport height */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            z-index: -21;
+            /* Ensure content is on top of background */
+        }
+        
+        .header_img {
+            background-image: url('images/bg_img1.jpeg');
+            background-repeat: repeat-x;
+            background-position: top left;
+            background-size: contain;
+            width: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 100%;
+            /* Ensure the image covers the entire height */
+            z-index: -21;
+            /* Put background image behind content */
+        }
+        
+        .home-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            /* Optional for better text readability */
+            z-index: 10;
+            /* Ensure text appears above the background */
+        }
+        /* Ensure text remains legible on smaller screens */
+        
+        @media (max-width: 768px) {
+            #home h1 {
+                font-size: 2.5rem;
+            }
+            .intro-text {
+                font-size: 1.1rem;
+            }
+            .mission {
+                font-size: 1rem;
+            }
+            .cta-button {
+                font-size: 1rem;
+                padding: 10px 25px;
+            }
+        }
+        
+        h1 {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+            line-height: 1.2;
+            letter-spacing: 1px;
+            z-index: 1;
+        }
+        
+        .intro-text {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            line-height: 1.6;
+            opacity: 0.8;
+            z-index: 1;
+        }
+        
+        .mission {
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+            z-index: 1;
+        }
+        
+        .cta-button {
+            background-color: gray;
+            /* Vibrant button color */
+            color: white;
+            padding: 12px 30px;
+            text-decoration: none;
+            font-size: 1.2rem;
+            border-radius: 30px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            z-index: 1;
+        }
+        
+        .cta-button:hover {
+            transform: scale(1.1);
+            background-color: Black;
+            /* Darker shade on hover */
+            transform: translateY(-3px);
+            z-index: 2;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            .intro-text {
+                font-size: 1.1rem;
+            }
+            .mission {
+                font-size: 1rem;
+            }
+            .cta-button {
+                font-size: 1rem;
+                padding: 10px 25px;
+            }
+        }
+        
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            padding-top: 40px;
+            /* Added padding-top to push down the content */
+        }
+        
+        .recipe-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .recipe-card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+        
+        .recipe-card:hover {
+            transform: scale(1.05);
+            background-color: antiquewhite;
+        }
+        
+        .recipe-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+        
+        .recipe-card-content {
+            padding: 15px;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+        
+        .modal-content {
+            background-color: white;
+            margin: 10% auto;
+            padding: 20px;
+            border-radius: 8px;
+            width: 80%;
+            max-width: 600px;
+        }
+        
+        .close-modal {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        #contact-form {
+            font-family: Arial, Helvetica, sans-serif;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        #contact-form input,
+        #contact-form textarea {
+            margin: 10px 0;
+            padding: 10px;
+        }
+        /* View Recipe Button Styling */
+        
+        .view-recipe-btn {
+            display: inline-block;
+            background-color: gray;
+            /* Tomato color */
+            color: #fff;
+            font-size: 12px;
+            font-weight: 300;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            z-index: 0;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .view-recipe-btn span {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .view-recipe-btn::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background-color: #000000;
+            /* Darker shade on hover */
+            transition: left 0.4s ease;
+            border-radius: 25px;
+            z-index: 1;
+        }
+        
+        .view-recipe-btn:hover::before {
+            left: 0;
+            /* Reveal the hover effect */
+        }
+        
+        .view-recipe-btn:hover {
+            transform: translateY(-3px);
+            /* Lift button */
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+            /* Add shadow */
+        }
+        
+        .view-recipe-btn:active {
+            transform: translateY(1px);
+            /* Push down slightly when clicked */
+        }
+        
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 1rem;
+        }
+        
+        @media (max-width: 600px) {
+            nav {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            nav ul li {
+                margin: 10px 0;
+            }
+            .header_img{
+                flex-direction: ROW;
+                align-items: center;
+                size-adjust: 100px 200px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <img class="header-img" src="images/bg_img.jpg" alt="Header Image">
+        <nav>
+            <div class="logo">Culinary Delights</div>
+            <ul>
+                <li class="af"><a href="#home">Home</a></li>
+                <li class="af"><a href="#recipes">Recipes</a></li>
+                <li class="af"><a href="#about">About Us</a></li>
+                <li class="af"><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="search-container">
+                <input type="text" id="search-input" placeholder="Search recipes...">
+                <button id="search-button">Search</button>
+            </div>
+        </nav>
+    </header>
+    <br><br><br><br>
+
+    <main>
+        <div>
+            <section id="home">
+                <img id="header_img" src="images/bg_img1.jpeg">
+                <h1>Welcome to Culinary Delights</h1>
+                <p class="intro-text">Discover amazing recipes from around the world, perfect for all skill levels. Whether you're a beginner or a seasoned chef, we've got something for you!</p>
+                <p class="mission">Our mission is to inspire food enthusiasts with fresh, easy-to-follow recipes that celebrate global flavors. Explore new cuisines and take your cooking to the next level.</p>
+                <a href="#recipes" class="cta-button">Explore Recipes</a>
+            </section>
+        </div>
+
+        <section id="recipes">
+            <h2>Our Recipes</h2><br>
+            <div id="recipe-container" class="recipe-grid">
+                <!-- Recipes will be dynamically loaded here -->
+            </div>
+        </section>
+
+        <section id="about" class="hidden">
+            <h2>About Us</h2>
+            <p>We are passionate food lovers who want to share delicious recipes from around the globe. Our mission is to inspire home cooks and food enthusiasts.</p>
+        </section>
+
+        <section id="contact" class="hidden">
+            <h2>Contact Us</h2>
+            <form id="contact-form">
+                <input type="text" placeholder="Your Name" required>
+                <input type="email" placeholder="Your Email" required>
+                <textarea placeholder="Your Message" required></textarea>
+                <button type="submit">Send Message</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Culinary Delights. All rights reserved.</p>
+    </footer>
+
+    <div id="recipe-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div id="modal-recipe-details">
+                <!-- Recipe details will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Recipe Data
+        const recipes = [{
+            id: 1,
+            name: "Classic Spaghetti Carbonara",
+            image: "images/spag.jpg",
+            ingredients: [
+                "400g spaghetti",
+                "200g pancetta or guanciale",
+                "4 large eggs",
+                "100g pecorino romano cheese",
+                "Black pepper",
+                "Salt"
+            ],
+            instructions: [
+                "Bring a large pot of salted water to boil.",
+                "Fry pancetta until crisp.",
+                "Whisk eggs with grated cheese.",
+                "Cook pasta, reserve some pasta water.",
+                "Mix hot pasta with egg mixture, adding pasta water.",
+                "Serve immediately with extra cheese and black pepper."
+            ],
+            cookTime: "30 minutes",
+            difficulty: "Medium"
+        }, {
+            id: 2,
+            name: "Thai Green Curry",
+            image: "images/thai.jpg",
+            ingredients: [
+                "400g chicken breast",
+                "2 tbsp green curry paste",
+                "1 can coconut milk",
+                "Mixed vegetables",
+                "Jasmine rice",
+                "Fresh basil leaves"
+            ],
+            instructions: [
+                "Slice chicken into bite-sized pieces.",
+                "Fry curry paste in a pan.",
+                "Add coconut milk and chicken.",
+                "Simmer until chicken is cooked.",
+                "Add vegetables and cook until tender.",
+                "Serve over jasmine rice with basil."
+            ],
+            cookTime: "45 minutes",
+            difficulty: "Easy"
+        }, {
+            id: 3,
+            name: "Vegetarian Quinoa Bowl",
+            image: "images/quin.jpg",
+            ingredients: [
+                "1 cup quinoa",
+                "Mixed roasted vegetables",
+                "Avocado",
+                "Chickpeas",
+                "Tahini dressing",
+                "Fresh herbs"
+            ],
+            instructions: [
+                "Cook quinoa according to package instructions.",
+                "Roast mixed vegetables with olive oil and seasoning.",
+                "Prepare chickpeas with spices.",
+                "Assemble bowl with quinoa, vegetables, and chickpeas.",
+                "Top with sliced avocado and tahini dressing.",
+                "Garnish with fresh herbs."
+            ],
+            cookTime: "40 minutes",
+            difficulty: "Easy"
+        }, {
+            id: 4,
+            name: "Grilled Salmon with Lemon Butter",
+            image: "images/salmon.jpeg",
+            ingredients: [
+                "2 salmon fillets",
+                "1 lemon, sliced",
+                "2 tbsp butter",
+                "Garlic cloves (minced)",
+                "Salt and pepper",
+                "Fresh parsley"
+            ],
+            instructions: [
+                "Season salmon with salt and pepper.",
+                "Melt butter in a pan and sauté garlic.",
+                "Place salmon fillets in the pan, skin-side down.",
+                "Top with lemon slices and cook until salmon flakes.",
+                "Garnish with fresh parsley and serve."
+            ],
+            cookTime: "20 minutes",
+            difficulty: "Easy"
+        }, {
+            id: 5,
+            name: "Chicken Tacos with Guacamole",
+            image: "images/tacos.jpg",
+            ingredients: [
+                "500g ground chicken",
+                "Taco shells",
+                "1 onion (chopped)",
+                "2 tomatoes (chopped)",
+                "Guacamole",
+                "Shredded cheese",
+                "Lettuce"
+            ],
+            instructions: [
+                "Cook ground chicken with onions until browned.",
+                "Add taco seasoning and mix well.",
+                "Prepare taco shells as per instructions.",
+                "Assemble tacos with chicken, lettuce, tomatoes, guacamole, and cheese.",
+                "Serve immediately."
+            ],
+            cookTime: "25 minutes",
+            difficulty: "Easy"
+        }, {
+            id: 6,
+            name: "Homemade Lasagna",
+            image: "images/lasagna.jpg",
+            ingredients: [
+                "12 lasagna noodles",
+                "500g ground beef",
+                "2 cups ricotta cheese",
+                "3 cups mozzarella cheese",
+                "1 onion, chopped",
+                "4 cups marinara sauce",
+                "Fresh basil",
+                "Salt and pepper"
+            ],
+            instructions: [
+                "Cook noodles as per instructions.",
+                "Sauté onions and ground beef until browned.",
+                "Layer noodles, beef, ricotta, and marinara sauce in a baking dish.",
+                "Top with mozzarella cheese.",
+                "Bake at 375°F (190°C) for 45 minutes.",
+                "Garnish with fresh basil and serve."
+            ],
+            cookTime: "1 hour",
+            difficulty: "Medium"
+        }, {
+            id: 7,
+            name: "Fluffy Pancakes",
+            image: "images/pancakes.jpg",
+            ingredients: [
+                "1 1/2 cups all-purpose flour",
+                "3 1/2 tsp baking powder",
+                "1 tbsp sugar",
+                "1 tsp salt",
+                "1 1/4 cups milk",
+                "1 egg",
+                "3 tbsp melted butter"
+            ],
+            instructions: [
+                "Mix flour, baking powder, sugar, and salt in a bowl.",
+                "Add milk, egg, and melted butter, whisk until smooth.",
+                "Heat a non-stick pan over medium heat.",
+                "Pour batter onto the pan and cook until bubbles form.",
+                "Flip and cook the other side until golden.",
+                "Serve warm with syrup or toppings of choice."
+            ],
+            cookTime: "20 minutes",
+            difficulty: "Easy"
+        }, {
+            id: 8,
+            name: "Homemade Ramen",
+            image: "images/ramen.jpg",
+            ingredients: [
+                "2 packs ramen noodles",
+                "4 cups chicken broth",
+                "2 eggs",
+                "200g chicken breast (sliced)",
+                "1 cup spinach",
+                "1 green onion, chopped",
+                "Soy sauce and sesame oil"
+            ],
+            instructions: [
+                "Boil chicken broth in a pot.",
+                "Add chicken breast and simmer until cooked.",
+                "Cook ramen noodles separately.",
+                "Soft boil eggs for 7 minutes, peel and slice.",
+                "Combine broth, noodles, and chicken in a bowl.",
+                "Top with eggs, spinach, green onion, and a dash of soy sauce."
+            ],
+            cookTime: "45 minutes",
+            difficulty: "Medium"
+        }, {
+            id: 9,
+            name: "Decadent Chocolate Cake",
+            image: "images/cake.jpg",
+            ingredients: [
+                "1 3/4 cups all-purpose flour",
+                "1 1/2 cups sugar",
+                "3/4 cup cocoa powder",
+                "2 tsp baking soda",
+                "1 tsp baking powder",
+                "2 eggs",
+                "1 cup buttermilk",
+                "1/2 cup vegetable oil",
+                "2 tsp vanilla extract"
+            ],
+            instructions: [
+                "Preheat oven to 350°F (175°C).",
+                "Mix dry ingredients: flour, sugar, cocoa, baking soda, and powder.",
+                "Add eggs, buttermilk, oil, and vanilla. Mix well.",
+                "Pour batter into greased pans and bake for 30-35 minutes.",
+                "Let cool before frosting.",
+                "Frost with chocolate ganache or buttercream and serve."
+            ],
+            cookTime: "1 hour 15 minutes",
+            difficulty: "Medium"
+        }];
+        document.addEventListener('DOMContentLoaded', () => {
+                    const recipeContainer = document.getElementById('recipe-container');
+                    const searchInput = document.getElementById('search-input');
+                    const searchButton = document.getElementById('search-button');
+                    const navLinks = document.querySelectorAll('nav ul li a');
+                    const sections = document.querySelectorAll('main section');
+                    const recipeModal = document.getElementById('recipe-modal');
+                    const modalRecipeDetails = document.getElementById('modal-recipe-details');
+                    const closeModal = document.querySelector('.close-modal');
+
+                    // Render recipe cards
+                    function renderRecipes(recipesToShow) {
+                        recipeContainer.innerHTML = '';
+                        recipesToShow.forEach(recipe => {
+                            const recipeCard = document.createElement('div');
+                            recipeCard.classList.add('recipe-card');
+                            recipeCard.innerHTML = `
+                        <img src="${recipe.image}" alt="${recipe.name}">
+                        <div class="recipe-card-content">
+                            <h3>${recipe.name}</h3>
+                            <p>Cook Time: ${recipe.cookTime}</p>
+                            <p>Difficulty: ${recipe.difficulty}</p>
+                            <button class="view-recipe-btn" onclick="openRecipeModal(6)">
+                            <span>View Recipe</span>
+                            </button>
+
+                        </div>
+                    `;
+                            recipeContainer.appendChild(recipeCard);
+                        });
+                    }
+
+                    // Search functionality
+                    function searchRecipes() {
+                        const searchTerm = searchInput.value.toLowerCase();
+                        const filteredRecipes = recipes.filter(recipe =>
+                            recipe.name.toLowerCase().includes(searchTerm)
+                        );
+                        renderRecipes(filteredRecipes);
+                    }
+
+                    // Open recipe modal
+                    window.openRecipeModal = (recipeId) => {
+                            const recipe = recipes.find(r => r.id === recipeId);
+                            if (recipe) {
+                                modalRecipeDetails.innerHTML = `
+                        <h2>${recipe.name}</h2>
+                        <img src="${recipe.image}" alt="${recipe.name}" style="width:100%; max-height:300px; object-fit:cover;">
+                        <h3>Ingredients:</h3>
+                        <ul>${recipe.ingredients.map(ing => <li>${ing}</li>).join('')}</ul>
+                        <h3>Instructions:</h3>
+                        <ol>${recipe.instructions.map(inst => <li>${inst}</li>).join('')}</ol>
+                    `;
+                    recipeModal.style.display = 'block';
+                }
+            };
+
+            // Close modal
+            closeModal.onclick = () => {
+                recipeModal.style.display = 'none';
+            };
+
+            // Close modal if clicked outside
+            window.onclick = (event) => {
+                if (event.target === recipeModal) {
+                    recipeModal.style.display = 'none';
+                }
+            };
+
+            // Navigation
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const targetId = link.getAttribute('href').substring(1);
+                    sections.forEach(section => {
+                        section.classList.add('hidden');
+                    });
+                    document.getElementById(targetId).classList.remove('hidden');
+                });
+            });
+
+            // Initial render
+            renderRecipes(recipes);
+
+            // Search event listeners
+            searchButton.addEventListener('click', searchRecipes);
+            searchInput.addEventListener('keyup', searchRecipes);
+
+            // Contact form submission
+            const contactForm = document.getElementById('contact-form');
+            contactForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                alert('Thank you for your message! We will get back to you soon.');
+                contactForm.reset();
+            });
+        });
+        document.querySelectorAll('nav ul li a').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1); // Get the section id (remove the '#' symbol)
+                document.getElementById(targetId).scrollIntoView({
+                    behavior: 'smooth' // Scrolls smoothly
+                });
+            });
+        });
+    </script>
+</body>
